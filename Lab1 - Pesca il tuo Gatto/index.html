@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesca il tuo Gatto - Livello Facile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 15px;
+      }
+      .barra-comandi {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      button {
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid #888;
+      }
+      #btn-pesca {
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        font-weight: bold;
+      }
+      #stato-caricamento {
+        font-weight: bold;
+        color: #555;
+        min-height: 20px;
+      }
+      .galleria {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .card {
+        border: 3px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        width: 240px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: scale(1.02);
+      }
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+      /* Classe da attivare/disattivare al click sulla card */
+      .card.preferita {
+        border-color: #4caf50;
+        background-color: #e8f5e9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐾 Pesca il tuo Gatto!</h1>
+    <p>
+      Clicca sul pulsante blu per scaricare un nuovo gatto dall'API. Clicca su
+      una card per metterla tra le preferite.
+    </p>
+
+    <div class="barra-comandi">
+      <button id="btn-pesca">🎲 Pesca un Gatto</button>
+      <button id="btn-solo-grandi">📏 Solo Foto Grandi (width > 600)</button>
+      <button id="btn-mostra-tutti">👁️ Mostra Tutti</button>
+      <button id="btn-svuota">🗑️ Svuota Galleria</button>
+    </div>
+
+    <p id="stato-caricamento"></p>
+    <h3>
+      Gatti in galleria: <span id="totale-gatti">0</span> | Preferiti:
+      <span id="totale-preferiti">0</span>
+    </h3>
+
+    <div id="galleria-gatti" class="galleria"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
