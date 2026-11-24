@@ -1,0 +1,10 @@
+{
+    "conventionalCommits.scopes": [
+        "createFile",
+        "featureStyle",
+        "featureFunction",
+        "settings",
+        "bugFix",
+        "sperimentation"
+    ]
+}
