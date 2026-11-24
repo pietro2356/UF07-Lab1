@@ -2,6 +2,8 @@ import Chip from "./Chip.js";
 import { applyStyleToElement } from "./utils.js";
 
 export default class CatCard{
+    static #FAVOURITES_KEY= "favourite-cats";
+
     #domElement;
 
     /**
@@ -46,7 +48,6 @@ export default class CatCard{
 
             applyStyleToElement(image, {
                 height: "128px",
-                // width: "128px",
                 margin: "0 auto 0 auto",
                 display: "block",
             });
@@ -69,12 +70,92 @@ export default class CatCard{
                 );
             }
 
+            const favouritesButton= document.createElement("div");
+            applyStyleToElement(favouritesButton, {
+                backgroundColor: "pink",
+                cursor: "pointer",
+                padding: ".5rem",
+                borderRadius: ".5rem",
+                display: "flex",
+                gap: ".5rem",
+            });
+            {
+                // Icon states
+                const hearthFullIcon= document.createElement("span");
+                hearthFullIcon.classList.add("fi", "fi-ss-heart");
+
+                const hearthEmptyIcon= document.createElement("span");
+                hearthEmptyIcon.classList.add("fi", "fi-bs-heart");
+
+                const hearthBrokenIcon= document.createElement("span");
+                hearthBrokenIcon.classList.add("fi", "fi-ss-heart-crack");
+
+                let icon;
+
+                if (this.isFavourite()){
+                    icon= hearthFullIcon;
+                }
+                else{
+                    icon= hearthEmptyIcon;
+                }
+
+                const text= document.createElement("p");
+                text.innerText= "Aggiungi ai preferiti";
+
+                favouritesButton.append(
+                    icon,
+                    text,
+                );
+
+                favouritesButton.addEventListener("mouseover", ()=> {
+                    if (this.isFavourite()){
+                        favouritesButton.replaceChild(hearthBrokenIcon, icon);
+                        icon= hearthBrokenIcon;
+                    }
+                    else{
+                        favouritesButton.replaceChild(hearthFullIcon, icon);
+                        icon= hearthFullIcon;
+                    }
+                });
+
+                favouritesButton.addEventListener("mouseout", ()=> {
+                    if (this.isFavourite()){
+                        favouritesButton.replaceChild(hearthFullIcon, icon);
+                        icon= hearthFullIcon;
+                    }
+                    else{
+                        favouritesButton.replaceChild(hearthEmptyIcon, icon);
+                        icon= hearthEmptyIcon;
+                    }
+                });
+
+                favouritesButton.addEventListener("click", ()=> {
+                    if (this.isFavourite()){
+                        this.removeFromFavourites();
+                    }
+                    else{
+                        this.addToFavourites();
+                    }
+
+                    // Update icons
+                    if (this.isFavourite()){
+                        favouritesButton.replaceChild(hearthFullIcon, icon);
+                        icon= hearthFullIcon;
+                    }
+                    else{
+                        favouritesButton.replaceChild(hearthEmptyIcon, icon);
+                        icon= hearthEmptyIcon;
+                    }
+                });
+            }
+
             const description= document.createElement("p");
             description.innerText= this.description;
 
             this.#domElement.append(
                 image,
                 chips,
+                favouritesButton,
                 description,
             );
         }
@@ -82,5 +163,26 @@ export default class CatCard{
 
     get domElement(){
         return this.#domElement;
+    }
+
+    #getFavourites(){
+        return JSON.parse(localStorage.getItem(CatCard.#FAVOURITES_KEY) || "[]");
+    }
+
+    addToFavourites(){
+        const favourites= this.#getFavourites();
+        favourites.push(this.id);
+        localStorage.setItem(CatCard.#FAVOURITES_KEY, JSON.stringify(favourites));
+    }
+
+    removeFromFavourites(){
+        let favourites= this.#getFavourites();
+        favourites= favourites.filter(el => el!== this.id);
+        localStorage.setItem(CatCard.#FAVOURITES_KEY, JSON.stringify(favourites));
+    }
+
+    isFavourite(){
+        const favourites= this.#getFavourites();
+        return favourites.includes(this.id);
     }
 }
