@@ -98,4 +98,5 @@ btnMostraTutti.addEventListener("click", () => {
 btnSvuota.addEventListener("click", () => {
     listaGatti = [];
     renderizzaGalleria(listaGatti);
+    spanTotalePreferiti.textContent = 0;
 });
