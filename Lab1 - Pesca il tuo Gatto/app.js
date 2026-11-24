@@ -22,11 +22,26 @@ let listaGatti = [];
 async function pescaNuovoGatto(){
     // TODO (Traguardo 1):
     // - Mostra "Caricamento in corso..." in statoCaricamento e disabilita btnPesca
+    statoCaricamento.textContent = "Caricamento in corso...";
     // - Usa try / catch / finally
-    // - Fai la fetch(API_URL) e converti la risposta con await risposta.json()
-    // - Attenzione: TheCatAPI restituisce un array con 1 elemento (es. dati[0])
-    // - Aggiungi il gatto trovato dentro listaGatti (usando .push())
-    // - Chiama renderizzaGalleria(listaGatti)
+    try {
+        // - Fai la fetch(API_URL) e converti la risposta con await risposta.json()
+        const risposta = await fetch(API_URL);
+        if (!risposta.ok){
+            throw new Error("Errore HTTP: " + risposta.status);
+        }
+        const dati = await risposta.json();
+        // - Attenzione: TheCatAPI restituisce un array con 1 elemento (es. dati[0])
+        // - Aggiungi il gatto trovato dentro listaGatti (usando .push())
+        listaGatti.push(dati[0]);
+        // - Chiama renderizzaGalleria(listaGatti)
+        renderizzaGalleria(listaGatti);
+    } catch(err) {
+        console.error("Caricamento fallito", err)
+    } finally {
+        console.log("Caricamento terminato!");
+        statoCaricamento.textContent = "";
+    }
 }
 
 // 4. FUNZIONE PER DISEGNARE LE CARD NEL DOM
