@@ -48,18 +48,37 @@ async function pescaNuovoGatto(){
 function renderizzaGalleria(arrayDaMostrare){
     // TODO (Traguardo 2):
     // - Svuota galleria.innerHTML
+    galleria.innerHTML = "";
     // - Aggiorna spanTotaleGatti.textContent con listaGatti.length
+    spanTotaleGatti.textContent = listaGatti.length;
     // - Cicla con .forEach() su arrayDaMostrare:
-    //   a) Crea un <div> con classe "card"
-    //   b) Inserisci <img> con src = gatto.url e un <p> con le dimensioni (gatto.width + " x " + gatto.height)
-    //   c) Al click sulla card, usa classList.toggle("preferita") e chiama aggiornaContatorePreferiti()
-    //   d) Aggiungi la card a galleria con appendChild()
+    arrayDaMostrare.forEach(gatto => {
+        //   a) Crea un <div> con classe "card"
+        const card = document.createElement("div");
+        card.classList.add("card");
+        //   b) Inserisci <img> con src = gatto.url e un <p> con le dimensioni (gatto.width + " x " + gatto.height)
+        const img = document.createElement("img");
+        img.src = gatto.url;
+        const p = document.createElement("p");
+        p.textContent = `${gatto.width} x ${gatto.height}`;
+        //   c) Al click sulla card, usa classList.toggle("preferita") e chiama aggiornaContatorePreferiti()
+        card.addEventListener("click", () => {
+            card.classList.toggle("preferita");
+            aggiornaContatorePreferiti();
+        });
+        //   d) Aggiungi la card a galleria con appendChild()
+        card.appendChild(img);
+        card.appendChild(p);
+        galleria.appendChild(card);
+    });
 }
 
 function aggiornaContatorePreferiti(){
     // TODO (Traguardo 2):
     // - Conta quante card nel DOM hanno la classe ".card.preferita" usando document.querySelectorAll
+    const preferiti = document.querySelectorAll(".card.preferita");
     // - Scrivi il numero dentro spanTotalePreferiti.textContent
+    spanTotalePreferiti.textContent = preferiti.length;
 }
 
 // 5. EVENTI DEI BOTTONI
