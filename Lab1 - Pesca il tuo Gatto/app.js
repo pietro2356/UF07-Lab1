@@ -86,3 +86,16 @@ btnPesca.addEventListener("click", pescaNuovoGatto);
 
 // TODO (Traguardo 3):
 // - Aggiungi gli eventi click a btnSoloGrandi (usa .filter()), btnMostraTutti e btnSvuota
+btnSoloGrandi.addEventListener("click", () => {
+    const gattiGrandi = listaGatti.filter(gatto => gatto.width > 500 && gatto.height > 500);
+    renderizzaGalleria(gattiGrandi);
+});
+
+btnMostraTutti.addEventListener("click", () => {
+    renderizzaGalleria(listaGatti);
+});
+
+btnSvuota.addEventListener("click", () => {
+    listaGatti = [];
+    renderizzaGalleria(listaGatti);
+});
