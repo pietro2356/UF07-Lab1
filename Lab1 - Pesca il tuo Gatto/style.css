@@ -1,0 +1,230 @@
+/* Importiamo un font tondeggiante e kawaii da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+/* 1. IMPOSTAZIONI GENERALI E SFONDO */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: #fff0f6;
+    /* Pattern a pois rosa pastello super carino */
+    background-image: radial-gradient(#ffc2d1 2px, transparent 2px);
+    background-size: 28px 28px;
+    color: #5c3a4d;
+    text-align: center;
+    padding: 30px 20px;
+    min-height: 100vh;
+}
+
+/* Titolo principale (se ne hai uno nell'HTML) */
+h1 {
+    font-size: 2.6rem;
+    color: #ff4d8d;
+    text-shadow: 3px 3px 0px #ffe0eb, 0 4px 12px rgba(255, 77, 141, 0.25);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+h1::before, h1::after {
+    content: " 🐾 ";
+}
+
+/* 2. BOTTONI KAWAII CON EFFETTO GOMMOSO */
+button {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    margin: 8px 6px;
+    border: 3px solid #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #ffffff;
+    box-shadow: 0 5px 0 rgba(190, 90, 130, 0.25), 0 8px 15px rgba(255, 105, 180, 0.2);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Effetto rimbalzo */
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.04);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(190, 90, 130, 0.25);
+}
+
+/* Bottone disabilitato durante il caricamento */
+button:disabled {
+    background: #e2cfd6 !important;
+    cursor: not-allowed;
+    opacity: 0.75;
+    transform: none;
+}
+
+/* Colori pastello personalizzati per ogni bottone */
+#btn-pesca {
+    background: linear-gradient(135deg, #ff75a0, #ff4d8d);
+}
+#btn-pesca::before {
+    content: "🐱 ";
+}
+
+#btn-solo-grandi {
+    background: linear-gradient(135deg, #b388eb, #9368d6);
+}
+#btn-solo-grandi::before {
+    content: "✨ ";
+}
+
+#btn-mostra-tutti {
+    background: linear-gradient(135deg, #72ddf7, #48bfe3);
+}
+#btn-mostra-tutti::before {
+    content: "🎀 ";
+}
+
+#btn-svuota {
+    background: linear-gradient(135deg, #ffb5a7, #f28482);
+}
+#btn-svuota::before {
+    content: "🗑️ ";
+}
+
+/* 3. STATO CARICAMENTO E CONTATORI */
+#stato-caricamento {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ff4d8d;
+    min-height: 28px;
+    margin: 15px 0;
+    animation: pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.6; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1.03); }
+}
+
+/* Stile per i numeri dei contatori */
+#totale-gatti, #totale-preferiti {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #ff4d8d;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    border: 2px solid #ffb3c6;
+    margin: 0 4px;
+    box-shadow: 0 3px 6px rgba(255, 143, 171, 0.2);
+}
+
+/* 4. GRIGLIA DELLA GALLERIA */
+#galleria-gatti {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 35px 25px; /* Spazio extra in alto per le orecchie da gatto! */
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 10px;
+}
+
+/* 5. LE CARD CON ORECCHIE DA GATTO IN PURO CSS */
+.card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 14px;
+    border: 4px solid #ffc2d1;
+    box-shadow: 0 10px 20px rgba(255, 143, 171, 0.22);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Orecchio sinistro e destro sopra ogni card */
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    top: -16px;
+    width: 32px;
+    height: 32px;
+    background-color: #ffc2d1;
+    border-radius: 8px 22px 8px 22px;
+    z-index: -1;
+    transition: all 0.25s ease;
+}
+
+.card::before {
+    left: 22px;
+    transform: rotate(-18deg);
+}
+
+.card::after {
+    right: 22px;
+    transform: rotate(108deg);
+}
+
+/* Effetto al passaggio del mouse sulla card */
+.card:hover {
+    transform: translateY(-8px) rotate(1.5deg);
+    border-color: #ff8fab;
+    box-shadow: 0 15px 28px rgba(255, 77, 141, 0.3);
+}
+
+.card:hover::before,
+.card:hover::after {
+    background-color: #ff8fab;
+    top: -19px;
+}
+
+/* Immagine del gatto dentro la card */
+.card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid #ffe5ec;
+    display: block;
+}
+
+/* Testo dimensioni sotto la foto */
+.card p {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #9e6b82;
+    background: #fff5f8;
+    padding: 6px 12px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.card p::before {
+    content: "📏 ";
+}
+
+/* 6. STATO PREFERITO (QUANDO CLICCHI LA CARD) */
+.card.preferita {
+    background: linear-gradient(180deg, #fff0f5 0%, #ffe3ec 100%);
+    border-color: #ff4d8d;
+    box-shadow: 0 0 0 4px rgba(255, 77, 141, 0.2), 0 12px 24px rgba(255, 77, 141, 0.35);
+    transform: scale(1.03);
+}
+
+.card.preferita::before,
+.card.preferita::after {
+    background-color: #ff4d8d;
+}
+
+.card.preferita p {
+    background-color: #ff4d8d;
+    color: #ffffff;
+}
+
+.card.preferita p::before {
+    content: "💖 ";
+}
