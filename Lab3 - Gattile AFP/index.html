@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gattile AFP | Trova il tuo compagno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="testata">
+        <div class="contenitore testata-contenuto">
+            <div class="marchio">
+                <span class="marchio-icona">🏡</span>
+                <div>
+                    <p class="sopratitolo">PROGETTO AFP · LABORATORIO 3</p>
+                    <h1>Gattile <span>AFP</span></h1>
+                </div>
+            </div>
+            <p class="testata-descrizione">Conosci i gatti e scopri le loro caratteristiche.</p>
+        </div>
+    </header>
+
+    <main class="contenitore contenuto-principale">
+        <section class="introduzione">
+            <div>
+                <p class="etichetta-sezione">IL TUO PROSSIMO AMICO TI ASPETTA</p>
+                <h2>Ogni gatto ha una storia</h2>
+                <p class="testo-introduzione">Aggiungi i tuoi preferiti alla lista dei candidati all'adozione.</p>
+            </div>
+            <div class="impronta-decorativa" aria-hidden="true">🐈</div>
+        </section>
+
+        <section class="pannello" aria-label="Controlli della galleria">
+            <div class="riga-viste">
+                <div class="selettore-viste">
+                    <button id="btn-esplora" class="bottone-vista attivo" type="button">Esplora</button>
+                    <button id="btn-preferiti" class="bottone-vista" type="button">I miei Preferiti <span id="contatore-preferiti" class="contatore">0</span></button>
+                </div>
+                <button id="btn-nuovi-gatti" class="bottone-nuovi" type="button">↻ Nuovi gatti</button>
+            </div>
+
+            <div class="filtri">
+                <label class="campo-ricerca" for="ricerca">
+                    <span class="icona-ricerca" aria-hidden="true">⌕</span>
+                    <input id="ricerca" type="search" placeholder="Cerca per razza o temperamento..." autocomplete="off">
+                </label>
+
+                <label class="campo-origine" for="filtro-origine">
+                    <span>Paese d'origine</span>
+                    <select id="filtro-origine">
+                        <option value="">Tutte le origini</option>
+                    </select>
+                </label>
+            </div>
+        </section>
+
+        <div id="messaggio-stato" class="messaggio-stato" role="status" aria-live="polite">Preparazione della galleria...</div>
+
+        <section class="sezione-galleria">
+            <div class="titolo-galleria">
+                <div>
+                    <p class="etichetta-sezione">LA GALLERIA</p>
+                    <h2 id="titolo-vista">Gatti da esplorare</h2>
+                </div>
+                <p class="suggerimento-card">Seleziona una scheda per leggere la descrizione</p>
+            </div>
+
+            <div id="galleria-gatti" class="griglia-gatti"></div>
+        </section>
+
+        <footer class="piè-pagina">
+            <p>Gattile AFP · Realizzato con tanto amore.</p>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
