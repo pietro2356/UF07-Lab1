@@ -19,16 +19,33 @@ const galleria = document.querySelector("#galleria-gatti");
 let listaGatti = [];
 
 // 3. FUNZIONE ASINCRONA PER SCARICARE UN GATTO
-async function pescaNuovoGatto(){
+async function pescaNuovoGatto() {
     // TODO (Traguardo 1):
-    // - Mostra "Caricamento in corso..." in statoCaricamento e disabilita btnPesca
-    // - Usa try / catch / finally
+    // - Mostra "Caricamento in corso..." in statoCaricamento e disabilita btnPesca ✔️
+    // - Usa try / catch / finally 
     // - Fai la fetch(API_URL) e converti la risposta con await risposta.json()
     // - Attenzione: TheCatAPI restituisce un array con 1 elemento (es. dati[0])
     // - Aggiungi il gatto trovato dentro listaGatti (usando .push())
     // - Chiama renderizzaGalleria(listaGatti)
-}
+    statoCaricamento.textContent = "Caricamento in corso...";
+    btnPesca.disable = true;
+    
+    try{
+        const res = await fatch(`https://api.thecatapi.com/v1/images/search`);
+        if(!res.ok){
+            throw new Error(`Errore HTTP: ${res.status}`);
+        }
+        const data = await res.json();
+        gattini.push(data.API_KEY)
 
+    } catch{
+
+
+    } finally{
+        renderizzaGalleria(listaGatti);
+    }
+
+}
 // 4. FUNZIONE PER DISEGNARE LE CARD NEL DOM
 function renderizzaGalleria(arrayDaMostrare){
     // TODO (Traguardo 2):
