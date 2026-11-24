@@ -1,7 +1,7 @@
 "use strict";
 
 // Inserisci qui la tua API Key (oppure lascia vuoto per la chiamata base)
-const API_KEY = "";
+const API_KEY = "live_eoqPl84XOjNfl1CxOulf82WGZP8TPFUkHEpAUm3WpeIOCt71gK2zsI3wJz2T9T85";
 const API_URL = "https://api.thecatapi.com/v1/images/search";
 
 // 1. SELEZIONE ELEMENTI DEL DOM
